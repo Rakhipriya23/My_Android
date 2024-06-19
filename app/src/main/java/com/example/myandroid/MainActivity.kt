@@ -28,6 +28,7 @@ import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgeDefaults.containerColor
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -66,31 +67,36 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column (
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement =  Arrangement.Center
-
-                    ){
-                       AssistChipM3()
-                    }
+                    LinearProgressIndicatorM3()
                 }
-            }
 
+
+            }
         }
     }
 }
+//Circular Progress Indicator
 @Composable
-fun AssistChipM3(){
-    AssistChip(
-        onClick = { /* do something*/ }, label = { Text(text = "Assist Chip")},
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Filled.Settings,
-                contentDescription = null,
-                modifier = Modifier.size(AssistChipDefaults.IconSize)
-            )
-        }
+fun CircularProgressIndicatorM3(){
+
+    var isLoading by remember {
+        mutableStateOf(false
         )
+    }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement =  Arrangement.Center
+    ) {
+        if(isLoading){
+            CircularProgressIndicator()
+        }
+        Button(onClick = { isLoading = !isLoading}) {
+            Text(text = "Click Here")
+
+        }
+    }
+
+
 }
 
