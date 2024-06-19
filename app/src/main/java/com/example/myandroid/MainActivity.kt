@@ -14,12 +14,23 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgeDefaults.containerColor
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -40,114 +51,59 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            AlertDialogFunction()
-//            Button(onClick = { println("I am Clicked") }) {
-//                Text("Filled Button")
-//            }
-//            OutlinedButton(onClick = { /*TODO*/ }) {
-//                Text(text = "Outlined Button")
-//            }
-//            
-//            TextButton(onClick = { /*TODO*/ }) {
-//                Text(text = "Text Button")
-//            }
-//          Row(
-//              modifier = Modifier.fillMaxWidth(),
-//              verticalAlignment = Alignment.CenterVertically){
-//
-//              Text(
-//                        text = "Android Developer",
-//                        fontSize = 30.sp,
-//                        modifier = Modifier
-//                            .padding(70.dp)
-//                            .background(Color.Cyan)
-//                            .clickable {
-//                                println("I am clickable")
-//                            }
-//
-//              )
-//          }
-//            Column {
-//                Text(text = "hello World", fontSize = 70.sp)
-//
-//                Row {
-//
-//                    Text(
-//                        text = "Android Developer",
-//                        fontSize = 30.sp
-//                    )
-//                    Text(
-//                        text = "Android Developer",
-//                        fontSize = 30.sp
-//                    )
-//
-//                }
-//                Box(modifier = Modifier.padding(20.dp)) {
-//                    Text(
-//                        text = "Android Developer",
-//                        fontSize = 30.sp
-//                    )
-//                    Text(
-//                        text = "Android Developer",
-//                        fontSize = 30.sp
-//                    )
-//                }
-//            }
-//            val gColors = listOf(Color.Cyan, Color.LightGray,Color.Blue)
-//            Text(text = "Hello World", fontSize = 40.sp,
-//                letterSpacing = 3.sp,
-//                style = TextStyle(
-//                    brush = Brush.linearGradient(
-//                        colors = gColors
-      //              )
-        //        )
-          //  )
-        }
+            MyAndroidTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    BadgeM3()
+                }
+            }
 
+
+
+
+        }
     }
 }
-//@OptIn(ExperimentalFoundationApi::class)
-//@Composable
-//private fun MarqueeEffect() {
-//    Box(
-//        modifier = Modifier.fillMaxSize(),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Text(
-//            modifier = Modifier.basicMarquee(),
-//            text = "Compose has finally added support for Marquee! It's soo easy to implement!"
-//        )
-//    }
-//}
-@OptIn(ExperimentalFoundationApi::class)
+    //badges
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun BadgeM3() {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            BadgedBox(
+                badge = {
+                    Badge {
+                        Text(text = "99+")
+                    }
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Email, contentDescription = "Email",
+                    modifier = Modifier
+                        .size(50.dp)
 
-@Composable
-fun AlertDialogFunction(){
-    AlertDialog(title = {
-                        Text(text = "I am Alert")
-    }, text = {
-              Text(text = "Please acknowledge us")
-    },
-        onDismissRequest = { /*TODO*/ }, confirmButton = {
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "ok")
+
+                )
+            }
         }
-    })
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
+    }
+    @Composable
+    fun Greeting(name: String, modifier: Modifier = Modifier) {
+        Text(
             text = "Hello $name!",
             modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyAndroidTheme {
-        Greeting("Android")
+        )
     }
-}
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        MyAndroidTheme {
+            Greeting("Android")
+        }
+    }
