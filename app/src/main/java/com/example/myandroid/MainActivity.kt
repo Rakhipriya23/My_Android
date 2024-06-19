@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LinearProgressIndicatorM3()
+                    CircularProgressIndicatorM3()
                 }
 
 
