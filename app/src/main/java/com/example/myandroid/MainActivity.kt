@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -72,7 +74,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            BottomCardExample()
+            //Surface(modifier = Modifier.fillMaxSize(),)
+
+            CounterButton()
 
 
             }
@@ -81,27 +85,20 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalFoundationApi::class,ExperimentalMaterial3Api::class)
  @Composable
-fun BottomCardExample(){
-    var showBottomSheet by remember{ mutableStateOf(false) }
-        val sheetState = rememberModalBottomSheetState(
-            skipPartiallyExpanded = false
-        )
-        Column {
-            Button(onClick = {
-                showBottomSheet = true
-            })
-             {
-                Text(text = "Show Bottom Card")
+fun CounterButton(){
+    var count by remember {
+        mutableStateOf(0)
+    }
+        Column(modifier = Modifier.padding(20.dp)
+        ) {
+            Text(text = "Count value : $count")
+            Spacer(modifier = Modifier.height(9.dp))
+            Button(onClick = { count++ }) {
+                Text(text = "Increment Count")
             }
-                if (showBottomSheet){
-                    ModalBottomSheet(modifier = Modifier.fillMaxHeight(),sheetState = sheetState,onDismissRequest = { showBottomSheet = false }) {
-                        Text(text = "I am inside Bottom Sheet", modifier = Modifier.padding(20.dp))
-                    }
-
-
-                    }
-                }
+            Spacer(modifier = Modifier.height(9.dp))
+            Button(onClick = { count-- }) {
+                Text(text = "Decrement Count")
+            }
         }
-
-
-
+}
