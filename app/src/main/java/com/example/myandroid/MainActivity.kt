@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -38,6 +39,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
@@ -46,6 +48,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -69,7 +72,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            CardExample()
+            BottomCardExample()
 
 
             }
@@ -78,16 +81,27 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalFoundationApi::class,ExperimentalMaterial3Api::class)
  @Composable
-fun CardExample(){
-    Card(
-        colors = CardDefaults.cardColors(containerColor =  Color.Green),
-        modifier = Modifier
-            .size(width = 300.dp, height = 100.dp)
-            .padding(10.dp),
-    ){
-        Text(text = "Simple Card Example",
-            modifier = Modifier.padding(20.dp), textAlign = TextAlign.Center)
-    }
-}
+fun BottomCardExample(){
+    var showBottomSheet by remember{ mutableStateOf(false) }
+        val sheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = false
+        )
+        Column {
+            Button(onClick = {
+                showBottomSheet = true
+            })
+             {
+                Text(text = "Show Bottom Card")
+            }
+                if (showBottomSheet){
+                    ModalBottomSheet(modifier = Modifier.fillMaxHeight(),sheetState = sheetState,onDismissRequest = { showBottomSheet = false }) {
+                        Text(text = "I am inside Bottom Sheet", modifier = Modifier.padding(20.dp))
+                    }
+
+
+                    }
+                }
+        }
+
 
 
