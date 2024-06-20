@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Settings
@@ -27,10 +28,12 @@ import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgeDefaults.containerColor
 import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -39,6 +42,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,42 +65,45 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            MyAndroidTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    CircularProgressIndicatorM3()
-                }
+            ScaffoldSample()
 
 
             }
         }
     }
-}
-//Circular Progress Indicator
-@Composable
-fun CircularProgressIndicatorM3(){
 
-    var isLoading by remember {
-        mutableStateOf(false
-        )
-    }
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement =  Arrangement.Center
-    ) {
-        if(isLoading){
-            CircularProgressIndicator()
-        }
-        Button(onClick = { isLoading = !isLoading}) {
-            Text(text = "Click Here")
+    @OptIn(ExperimentalFoundationApi::class,ExperimentalMaterial3Api::class)
+ @Composable
+ fun ScaffoldSample(){
 
-        }
-    }
+     Scaffold(
+         topBar = {
+             TopAppBar(
+                 title = { Text(text = "My Top App Bar")
+                 }
+             )
+         },
+         bottomBar = {
+             BottomAppBar (
+                 containerColor = MaterialTheme.colorScheme.primaryContainer,
+                 contentColor = MaterialTheme.colorScheme.primary
+             ){
+                 Text(text = "My Bottom Bar")
+             }
+
+         },
+         floatingActionButton = {
+             FloatingActionButton(onClick = { /*TODO*/ }) {
+                 Icon(Icons.Default.AccountBox, contentDescription = "Add")
+             }
+         }
+     ) {
+         Column (modifier = Modifier.padding(it)){
+             Text(text = "I am Inside the Body of App Structure")
+         }
+     }
+
+ }
 
 
-}
 
