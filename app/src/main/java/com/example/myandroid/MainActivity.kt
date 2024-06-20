@@ -48,6 +48,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -76,7 +77,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             //Surface(modifier = Modifier.fillMaxSize(),)
 
-            CounterButton()
+            TextFieldSample()
 
 
             }
@@ -85,20 +86,24 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalFoundationApi::class,ExperimentalMaterial3Api::class)
  @Composable
-fun CounterButton(){
-    var count by remember {
-        mutableStateOf(0)
+fun TextFieldSample(){
+    var text by remember {
+        mutableStateOf("")
+        
     }
-        Column(modifier = Modifier.padding(20.dp)
+        Column(
+            modifier = Modifier.padding(30.dp)
         ) {
-            Text(text = "Count value : $count")
-            Spacer(modifier = Modifier.height(9.dp))
-            Button(onClick = { count++ }) {
-                Text(text = "Increment Count")
-            }
-            Spacer(modifier = Modifier.height(9.dp))
-            Button(onClick = { count-- }) {
-                Text(text = "Decrement Count")
-            }
+            TextField(value = text, onValueChange = {newtext ->
+                text = newtext
+            }, label = {
+                Text(text = "Enter Anything")
+            }, modifier = Modifier.fillMaxWidth(),
+                placeholder = {
+                    Text(text = "placeholder")
+                }
+                )
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(text = "Hello From User Input:$text")
         }
 }
