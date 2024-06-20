@@ -30,6 +30,8 @@ import androidx.compose.material3.BadgeDefaults.containerColor
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,6 +45,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -65,7 +69,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            ScaffoldSample()
+            CardExample()
 
 
             }
@@ -74,36 +78,16 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalFoundationApi::class,ExperimentalMaterial3Api::class)
  @Composable
- fun ScaffoldSample(){
-
-     Scaffold(
-         topBar = {
-             TopAppBar(
-                 title = { Text(text = "My Top App Bar")
-                 }
-             )
-         },
-         bottomBar = {
-             BottomAppBar (
-                 containerColor = MaterialTheme.colorScheme.primaryContainer,
-                 contentColor = MaterialTheme.colorScheme.primary
-             ){
-                 Text(text = "My Bottom Bar")
-             }
-
-         },
-         floatingActionButton = {
-             FloatingActionButton(onClick = { /*TODO*/ }) {
-                 Icon(Icons.Default.AccountBox, contentDescription = "Add")
-             }
-         }
-     ) {
-         Column (modifier = Modifier.padding(it)){
-             Text(text = "I am Inside the Body of App Structure")
-         }
-     }
-
- }
-
+fun CardExample(){
+    Card(
+        colors = CardDefaults.cardColors(containerColor =  Color.Green),
+        modifier = Modifier
+            .size(width = 300.dp, height = 100.dp)
+            .padding(10.dp),
+    ){
+        Text(text = "Simple Card Example",
+            modifier = Modifier.padding(20.dp), textAlign = TextAlign.Center)
+    }
+}
 
 
