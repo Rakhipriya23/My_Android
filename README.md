@@ -48,3 +48,8 @@
 
 <h3>Navigation</h3>
 ![Screenshot 2024-06-20 221353](https://github.com/Rakhipriya23/My_Android/assets/138460379/450e0bc0-1f4f-4b8c-a058-1b997f228126)
+
+
+<h3>API call</h3>
+![ApiCall](https://github.com/Rakhipriya23/My_Android/assets/138460379/b958b97d-edec-4feb-b9e0-31cee6cf6bc7)
+
